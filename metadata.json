@@ -1,0 +1,6 @@
+{
+  "name": "Guías de Onda Rectangulares - Teoría Electromagnética",
+  "description": "Aplicación educativa interactiva para el estudio de guías de onda rectangulares (temas 3.1, 3.2 y 3.3). Incluye módulo teórico formal con KaTeX, laboratorio virtual interactivo, tutor socrático y evaluación con constancia de acreditación.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
