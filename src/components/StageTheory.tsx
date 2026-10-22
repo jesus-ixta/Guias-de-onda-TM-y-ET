@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import MathView from './MathView';
-import { BookOpen, Layers, Zap, Radio, ChevronRight, CheckCircle2, ShieldAlert, Sparkles } from 'lucide-react';
+import { BookOpen, ChevronRight, ShieldAlert } from 'lucide-react';
 
 export const StageTheory: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'3.1' | '3.2' | '3.3'>('3.1');
@@ -117,8 +117,13 @@ export const StageTheory: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
-                  <span className="font-bold">Condición de Frontera Conductora Perfecta (PEC):</span> En las cuatro paredes metálicas (<MathView math="x=0, a" /> e <MathView math="y=0, b" />), el campo eléctrico tangencial debe anularse idénticamente: <MathView math="\hat{n} \times \vec{E} = 0" />.
+                <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-2">
+                  <div>
+                    <span className="font-bold block mb-1">Condición de Frontera Conductora Perfecta (PEC):</span>
+                    <span>
+                      En las cuatro paredes metálicas (<MathView math="x=0, a" /> e <MathView math="y=0, b" />), el campo eléctrico tangencial debe anularse idénticamente: <MathView math="\hat{n} \times \vec{E} = 0" />.
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -138,19 +143,16 @@ export const StageTheory: React.FC = () => {
                   <line x1="180" y1="160" x2="280" y2="70" stroke="#64748B" strokeWidth="1.5" />
 
                   {/* Dimensions Annotations */}
-                  {/* Width 'a' */}
                   <line x1="40" y1="175" x2="180" y2="175" stroke="#F59E0B" strokeWidth="1.5" />
                   <polyline points="46,171 40,175 46,179" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
                   <polyline points="174,171 180,175 174,179" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
                   <text x="105" y="195" fill="#F59E0B" fontSize="12" fontWeight="bold" textAnchor="middle">ancho: a (eje x)</text>
 
-                  {/* Height 'b' */}
                   <line x1="25" y1="80" x2="25" y2="160" stroke="#F59E0B" strokeWidth="1.5" />
                   <polyline points="21,86 25,80 29,86" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
                   <polyline points="21,154 25,160 29,154" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
                   <text x="18" y="125" fill="#F59E0B" fontSize="12" fontWeight="bold" textAnchor="end">alto: b (eje y)</text>
 
-                  {/* Propagation vector +z */}
                   <line x1="200" y1="110" x2="270" y2="55" stroke="#10B981" strokeWidth="2.5" />
                   <polygon points="273,53 260,57 266,66" fill="#10B981" />
                   <text x="245" y="45" fill="#10B981" fontSize="11" fontWeight="bold">Propagación +z</text>
@@ -174,16 +176,14 @@ export const StageTheory: React.FC = () => {
               La frecuencia de corte <MathView math="f_{c,mn}" /> representa la frecuencia umbral por debajo de la cual el modo particular <MathView math="(m,n)" /> no puede transportar potencia activa y sufre atenuación evanescente:
             </p>
 
-            <MathView block>
-              {`f_{c,mn} = \\frac{c}{2\\sqrt{\\mu_r \\epsilon_r}} \\sqrt{\\left(\\frac{m}{a}\\right)^2 + \\left(\\frac{n}{b}\\right)^2}`}
-            </MathView>
+            <MathView block math="f_{c,mn} = \frac{c}{2\sqrt{\mu_r \epsilon_r}} \sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3 text-xs sm:text-sm">
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                 <h4 className="font-semibold text-slate-900 mb-2">Desglose de Parámetros:</h4>
                 <ul className="space-y-1.5 text-slate-600">
-                  <li><MathView math="c \approx 3 \times 10^8 \\text{ m/s}" />: Velocidad de la luz en el vacío.</li>
-                  <li><MathView math="\epsilon_r, \\mu_r" />: Constantes dieléctricas relativas del medio interno.</li>
+                  <li><MathView math="c \approx 3 \times 10^8\text{ m/s}" />: Velocidad de la luz en el vacío.</li>
+                  <li><MathView math="\epsilon_r, \mu_r" />: Constantes dieléctricas relativas del medio interno.</li>
                   <li><MathView math="m" />: Número de semi-variaciones senoidales de campo a lo largo del ancho <MathView math="a" />.</li>
                   <li><MathView math="n" />: Número de semi-variaciones senoidales a lo largo del alto <MathView math="b" />.</li>
                 </ul>
@@ -194,9 +194,7 @@ export const StageTheory: React.FC = () => {
                 <p className="text-slate-600">
                   El número de onda transversal de corte <MathView math="k_c" /> se define como:
                 </p>
-                <MathView block>
-                  {`k_{c,mn} = \\sqrt{ \\left(\\frac{m\\pi}{a}\\right)^2 + \\left(\\frac{n\\pi}{b}\\right)^2 }`}
-                </MathView>
+                <MathView block math="k_{c,mn} = \sqrt{ \left(\frac{m\pi}{a}\right)^2 + \left(\frac{n\pi}{b}\right)^2 }" />
               </div>
             </div>
           </div>
@@ -221,13 +219,11 @@ export const StageTheory: React.FC = () => {
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
                 <div className="font-semibold text-blue-700 text-sm flex items-center justify-between">
                   <span>Constante de Fase</span>
-                  <MathView math="\\beta" />
+                  <MathView math="\beta" />
                 </div>
-                <MathView block>
-                  {`\\beta = k \\sqrt{1 - \\left(\\frac{f_c}{f}\\right)^2}`}
-                </MathView>
+                <MathView block math="\beta = k \sqrt{1 - \left(\frac{f_c}{f}\right)^2}" />
                 <p className="text-xs text-slate-600">
-                  Donde <MathView math="k = \\omega\\sqrt{\\mu\\epsilon} = 2\\pi/\\lambda" /> es el número de onda del medio no acotado.
+                  Donde <MathView math="k = \omega\sqrt{\mu\epsilon} = 2\pi/\lambda" /> es el número de onda del medio no acotado.
                 </p>
               </div>
 
@@ -235,13 +231,11 @@ export const StageTheory: React.FC = () => {
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
                 <div className="font-semibold text-blue-700 text-sm flex items-center justify-between">
                   <span>Longitud de Onda en Guía</span>
-                  <MathView math="\\lambda_g" />
+                  <MathView math="\lambda_g" />
                 </div>
-                <MathView block>
-                  {`\\lambda_g = \\frac{\\lambda}{\\sqrt{1 - \\left(\\frac{f_c}{f}\\right)^2}} > \\lambda`}
-                </MathView>
+                <MathView block math="\lambda_g = \frac{\lambda}{\sqrt{1 - \left(\frac{f_c}{f}\right)^2}} > \lambda" />
                 <p className="text-xs text-slate-600">
-                  Nótese que <MathView math="\\lambda_g" /> es <strong>siempre mayor</strong> que la longitud de onda en espacio libre <MathView math="\\lambda" />.
+                  Nótese que <MathView math="\lambda_g" /> es <strong>siempre mayor</strong> que la longitud de onda en espacio libre <MathView math="\lambda" />.
                 </p>
               </div>
 
@@ -251,9 +245,7 @@ export const StageTheory: React.FC = () => {
                   <span>Velocidad de Fase</span>
                   <MathView math="v_p" />
                 </div>
-                <MathView block>
-                  {`v_p = \\frac{u}{\\sqrt{1 - \\left(\\frac{f_c}{f}\\right)^2}} > u`}
-                </MathView>
+                <MathView block math="v_p = \frac{u}{\sqrt{1 - \left(\frac{f_c}{f}\right)^2}} > u" />
                 <p className="text-xs text-slate-600">
                   La velocidad a la que se desplaza la cresta de fase en el eje <MathView math="z" /> supera la velocidad de la luz en el medio (<MathView math="v_p > u" />).
                 </p>
@@ -265,11 +257,9 @@ export const StageTheory: React.FC = () => {
                   <span>Velocidad de Grupo (Energía)</span>
                   <MathView math="v_g" />
                 </div>
-                <MathView block>
-                  {`v_g = u \\sqrt{1 - \\left(\\frac{f_c}{f}\\right)^2} < u`}
-                </MathView>
+                <MathView block math="v_g = u \sqrt{1 - \left(\frac{f_c}{f}\right)^2} < u" />
                 <p className="text-xs text-slate-600">
-                  Velocidad real de transporte de energía e información. Satisface siempre la relación relativista <MathView math="v_p \\cdot v_g = u^2" />.
+                  Velocidad real de transporte de energía e información. Satisface siempre la relación relativista <MathView math="v_p \cdot v_g = u^2" />.
                 </p>
               </div>
 
@@ -279,11 +269,9 @@ export const StageTheory: React.FC = () => {
                   <span>Impedancia de Onda TE</span>
                   <MathView math="Z_{TE}" />
                 </div>
-                <MathView block>
-                  {`Z_{TE} = \\frac{\\eta}{\\sqrt{1 - \\left(\\frac{f_c}{f}\\right)^2}} > \\eta`}
-                </MathView>
+                <MathView block math="Z_{TE} = \frac{\eta}{\sqrt{1 - \left(\frac{f_c}{f}\right)^2}} > \eta" />
                 <p className="text-xs text-slate-600">
-                  Para el vacío <MathView math="\\eta_0 \\approx 377\\ \\Omega" />. Al acercarse al corte (<MathView math="f \\to f_c" />), <MathView math="Z_{TE} \\to \\infty" />.
+                  Para el vacío <MathView math="\eta_0 \approx 377\ \Omega" />. Al acercarse al corte (<MathView math="f \to f_c" />), <MathView math="Z_{TE} \to \infty" />.
                 </p>
               </div>
 
@@ -293,11 +281,9 @@ export const StageTheory: React.FC = () => {
                   <span>Impedancia de Onda TM</span>
                   <MathView math="Z_{TM}" />
                 </div>
-                <MathView block>
-                  {`Z_{TM} = \\eta \\sqrt{1 - \\left(\\frac{f_c}{f}\\right)^2} < \\eta`}
-                </MathView>
+                <MathView block math="Z_{TM} = \eta \sqrt{1 - \left(\frac{f_c}{f}\right)^2} < \eta" />
                 <p className="text-xs text-slate-600">
-                  En los modos TM, la impedancia es siempre menor que la intrínseca <MathView math="\\eta" /> y tiende a cero en el corte.
+                  En los modos TM, la impedancia es siempre menor que la intrínseca <MathView math="\eta" /> y tiende a cero en el corte.
                 </p>
               </div>
             </div>
@@ -323,9 +309,10 @@ export const StageTheory: React.FC = () => {
               En los modos <strong>Transversales Magnéticos (TM)</strong>, el vector de campo magnético no posee componente a lo largo del eje de propagación, mientras que el campo eléctrico sí cuenta con una componente longitudinal:
             </p>
 
-            <div className="flex justify-center">
-              <div className="p-3 bg-blue-50/80 border border-blue-200 rounded-xl text-center font-semibold text-blue-900 text-sm px-6">
-                <MathView math="H_z = 0, \\quad E_z \\neq 0" />
+            {/* Clean Centered Highlight Box */}
+            <div className="flex justify-center my-3">
+              <div className="py-2.5 px-8 bg-blue-50/90 border border-blue-200 rounded-xl shadow-xs text-center">
+                <MathView math="H_z = 0, \quad E_z \neq 0" className="text-base font-bold text-blue-950" />
               </div>
             </div>
 
@@ -333,9 +320,7 @@ export const StageTheory: React.FC = () => {
               Resolviendo la ecuación de onda de Helmholtz bidimensional por el método de separación de variables <MathView math="E_z(x, y) = X(x) Y(y)" /> sujeto a las condiciones de frontera de Dirichlet impuestas por las paredes conductoras ideales:
             </p>
 
-            <MathView block>
-              {`E_z(x, y, z) = E_0 \\sin\\left(\\frac{m\\pi x}{a}\\right) \\sin\\left(\\frac{n\\pi y}{b}\\right) e^{-j\\beta z}`}
-            </MathView>
+            <MathView block math="E_z(x, y, z) = E_0 \sin\left(\frac{m\pi x}{a}\right) \sin\left(\frac{n\pi y}{b}\right) e^{-j\beta z}" />
 
             <p className="text-slate-700 text-sm">
               Las componentes transversales restantes se derivan analíticamente aplicando las ecuaciones de Maxwell:
@@ -343,24 +328,16 @@ export const StageTheory: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                <MathView block>
-                  {`E_x = -\\frac{j\\beta}{k_c^2} \\left(\\frac{m\\pi}{a}\\right) E_0 \\cos\\left(\\frac{m\\pi x}{a}\\right) \\sin\\left(\\frac{n\\pi y}{b}\\right) e^{-j\\beta z}`}
-                </MathView>
+                <MathView block math="E_x = -\frac{j\beta}{k_c^2} \left(\frac{m\pi}{a}\right) E_0 \cos\left(\frac{m\pi x}{a}\right) \sin\left(\frac{n\pi y}{b}\right) e^{-j\beta z}" />
               </div>
               <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                <MathView block>
-                  {`E_y = -\\frac{j\\beta}{k_c^2} \\left(\\frac{n\\pi}{b}\\right) E_0 \\sin\\left(\\frac{m\\pi x}{a}\\right) \\cos\\left(\\frac{n\\pi y}{b}\\right) e^{-j\\beta z}`}
-                </MathView>
+                <MathView block math="E_y = -\frac{j\beta}{k_c^2} \left(\frac{n\pi}{b}\right) E_0 \sin\left(\frac{m\pi x}{a}\right) \cos\left(\frac{n\pi y}{b}\right) e^{-j\beta z}" />
               </div>
               <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                <MathView block>
-                  {`H_x = \\frac{j\\omega\\epsilon}{k_c^2} \\left(\\frac{n\\pi}{b}\\right) E_0 \\sin\\left(\\frac{m\\pi x}{a}\\right) \\cos\\left(\\frac{n\\pi y}{b}\\right) e^{-j\\beta z}`}
-                </MathView>
+                <MathView block math="H_x = \frac{j\omega\epsilon}{k_c^2} \left(\frac{n\pi}{b}\right) E_0 \sin\left(\frac{m\pi x}{a}\right) \cos\left(\frac{n\pi y}{b}\right) e^{-j\beta z}" />
               </div>
               <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                <MathView block>
-                  {`H_y = -\\frac{j\\omega\\epsilon}{k_c^2} \\left(\\frac{m\\pi}{a}\\right) E_0 \\cos\\left(\\frac{m\\pi x}{a}\\right) \\sin\\left(\\frac{n\\pi y}{b}\\right) e^{-j\\beta z}`}
-                </MathView>
+                <MathView block math="H_y = -\frac{j\omega\epsilon}{k_c^2} \left(\frac{m\pi}{a}\right) E_0 \cos\left(\frac{m\pi x}{a}\right) \sin\left(\frac{n\pi y}{b}\right) e^{-j\beta z}" />
               </div>
             </div>
           </div>
@@ -378,46 +355,56 @@ export const StageTheory: React.FC = () => {
               Examinemos minuciosamente la función potencial del campo eléctrico longitudinal <MathView math="E_z" />:
             </p>
 
-            <MathView block>
-              {`E_z(x, y) = E_0 \\sin\\left(\\frac{m\\pi x}{a}\\right) \\sin\\left(\\frac{n\\pi y}{b}\\right)`}
-            </MathView>
+            <MathView block math="E_z(x, y) = E_0 \sin\left(\frac{m\pi x}{a}\right) \sin\left(\frac{n\pi y}{b}\right)" />
 
             <div className="space-y-3 text-xs sm:text-sm text-amber-950">
-              <div className="p-3.5 bg-white/80 rounded-xl border border-amber-200">
-                <strong className="text-amber-900 block mb-1">Caso 1: Si <MathView math="m = 0" />:</strong>
-                <p>
-                  Para cualquier valor de <MathView math="n" />, el primer término senoidal resulta: <MathView math="\\sin\\left(\\frac{0 \\cdot \\pi x}{a}\\right) = \\sin(0) \\equiv 0" />.
-                  Por tanto, <MathView math="E_z(x,y) = E_0 \\cdot 0 \\cdot \\sin\\left(\\frac{n\\pi y}{b}\\right) \\equiv 0" /> en todos los puntos de la guía.
+              {/* Caso 1 */}
+              <div className="p-4 bg-white/90 rounded-xl border border-amber-200 space-y-1.5 shadow-2xs">
+                <strong className="text-amber-900 block text-sm font-bold">
+                  Caso 1: Si <MathView math="m = 0" />:
+                </strong>
+                <p className="text-slate-700 text-xs sm:text-sm">
+                  Para cualquier valor de <MathView math="n" />, el primer factor senoidal resulta:{' '}
+                  <MathView math="\sin\left(\frac{0 \cdot \pi x}{a}\right) = \sin(0) \equiv 0" />.
+                  Por tanto, el potencial longitudinal se anula por completo:{' '}
+                  <MathView math="E_z(x,y) = E_0 \cdot 0 \cdot \sin\left(\frac{n\pi y}{b}\right) \equiv 0" />{' '}
+                  en todos los puntos interiores de la guía.
                 </p>
               </div>
 
-              <div className="p-3.5 bg-white/80 rounded-xl border border-amber-200">
-                <strong className="text-amber-900 block mb-1">Caso 2: Si <MathView math="n = 0" />:</strong>
-                <p>
-                  Para cualquier valor de <MathView math="m" />, el segundo término senoidal resulta: <MathView math="\\sin\\left(\\frac{0 \\cdot \\pi y}{b}\\right) = \\sin(0) \\equiv 0" />.
-                  Por tanto, <MathView math="E_z(x,y) \\equiv 0" /> en toda la guía.
+              {/* Caso 2 */}
+              <div className="p-4 bg-white/90 rounded-xl border border-amber-200 space-y-1.5 shadow-2xs">
+                <strong className="text-amber-900 block text-sm font-bold">
+                  Caso 2: Si <MathView math="n = 0" />:
+                </strong>
+                <p className="text-slate-700 text-xs sm:text-sm">
+                  Para cualquier valor de <MathView math="m" />, el segundo factor senoidal resulta:{' '}
+                  <MathView math="\sin\left(\frac{0 \cdot \pi y}{b}\right) = \sin(0) \equiv 0" />.
+                  Por consiguiente, el potencial longitudinal es idénticamente nulo:{' '}
+                  <MathView math="E_z(x,y) \equiv 0" /> en toda la sección transversal.
                 </p>
               </div>
 
-              <div className="p-3.5 bg-white/80 rounded-xl border border-amber-200">
-                <strong className="text-amber-900 block mb-1">Consecuencia Física sobre las componentes transversales:</strong>
-                <p>
-                  Si <MathView math="E_z \\equiv 0" />, y como por definición de modo TM ya se tenía <MathView math="H_z = 0" />, entonces al ser ambas componentes longitudinales nulas, <strong>todas las derivadas espaciales se anulan</strong>, conllevando a:
+              {/* Consecuencia Física */}
+              <div className="p-4 bg-white/90 rounded-xl border border-amber-200 space-y-2.5 shadow-2xs">
+                <strong className="text-amber-900 block text-sm font-bold">
+                  Consecuencia Física sobre las Componentes Transversales:
+                </strong>
+                <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">
+                  Si <MathView math="E_z \equiv 0" />, y como por definición propia del modo TM ya se tiene <MathView math="H_z = 0" />, al ser ambas componentes longitudinales nulas simultáneamente, <strong>todas las derivadas espaciales se anulan</strong>, conllevando de inmediato a:
                 </p>
-                <MathView block>
-                  {`E_x = 0, \\quad E_y = 0, \\quad H_x = 0, \\quad H_y = 0`}
-                </MathView>
-                <p className="mt-1 font-semibold text-rose-800">
-                  ¡No existe ningún campo electromagnético! Esto representa una solución trivial vacía (no hay onda).
+                <div className="py-2.5 px-4 rounded-lg bg-slate-50 border border-slate-200 text-center">
+                  <MathView math="E_x = 0, \quad E_y = 0, \quad H_x = 0, \quad H_y = 0" className="text-sm font-semibold text-slate-800" />
+                </div>
+                <p className="text-xs text-rose-700 font-medium">
+                  ¡No existe ningún campo electromagnético! Esto representa una solución física trivial (onda nula).
                 </p>
               </div>
             </div>
 
-            <div className="bg-emerald-100 border border-emerald-300 p-3.5 rounded-xl text-emerald-950 text-xs sm:text-sm font-medium">
+            <div className="bg-emerald-100/90 border border-emerald-300 p-4 rounded-xl text-emerald-950 text-xs sm:text-sm font-medium">
               <span className="font-bold">Conclusión Fundamental:</span> Para que un modo TM exista en una guía rectangular metálica, ambos subíndices deben ser estrictamente enteros positivos no nulos:
-              <MathView block>
-                {`m \\ge 1 \\quad \\text{y} \\quad n \\ge 1`}
-              </MathView>
+              <MathView block math="m \ge 1 \quad \text{y} \quad n \ge 1" />
               Por consiguiente, el modo magnético transversal de <strong>menor frecuencia de corte</strong> posible es el <MathView math="TM_{11}" />.
             </div>
           </div>
@@ -442,22 +429,21 @@ export const StageTheory: React.FC = () => {
               En los modos <strong>Transversales Eléctricos (TE)</strong>, el vector de campo eléctrico es enteramente transversal al eje de propagación, de modo que:
             </p>
 
-            <div className="flex justify-center">
-              <div className="p-3 bg-blue-50/80 border border-blue-200 rounded-xl text-center font-semibold text-blue-900 text-sm px-6">
-                <MathView math="E_z = 0, \\quad H_z \\neq 0" />
+            {/* Clean Centered Highlight Box */}
+            <div className="flex justify-center my-3">
+              <div className="py-2.5 px-8 bg-blue-50/90 border border-blue-200 rounded-xl shadow-xs text-center">
+                <MathView math="E_z = 0, \quad H_z \neq 0" className="text-base font-bold text-blue-950" />
               </div>
             </div>
 
-            <p className="text-slate-700 text-sm">
-              La componente longitudinal de campo magnético <MathView math="H_z" /> satisface la ecuación de Helmholtz con condiciones de frontera de tipo Neumann (<MathView math="\\partial H_z / \\partial n = 0" /> en las paredes):
+            <p className="text-slate-700 text-sm leading-relaxed">
+              La componente longitudinal de campo magnético <MathView math="H_z" /> satisface la ecuación de Helmholtz con condiciones de frontera de tipo Neumann (<MathView math="\frac{\partial H_z}{\partial n} = 0" /> en las paredes):
             </p>
 
-            <MathView block>
-              {`H_z(x, y, z) = H_0 \\cos\\left(\\frac{m\\pi x}{a}\\right) \\cos\\left(\\frac{n\\pi y}{b}\\right) e^{-j\\beta z}`}
-            </MathView>
+            <MathView block math="H_z(x, y, z) = H_0 \cos\left(\frac{m\pi x}{a}\right) \cos\left(\frac{n\pi y}{b}\right) e^{-j\beta z}" />
 
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700">
-              A diferencia de los modos TM, en los modos TE <strong>sí se permite que <MathView math="m=0" /> o <MathView math="n=0" /></strong> de manera individual (debido a que la función coseno evaluada en cero es la unidad: <MathView math="\\cos(0) = 1" />). La única restricción es que ambos no pueden ser cero simultáneamente (<MathView math="m=n=0" /> anularía el gradiente transversal).
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed">
+              A diferencia de los modos TM, en los modos TE <strong>sí se permite que <MathView math="m=0" /> o <MathView math="n=0" /></strong> de manera individual (debido a que la función coseno evaluada en cero es la unidad: <MathView math="\cos(0) = 1" />). La única restricción es que ambos no pueden ser cero simultáneamente (<MathView math="m=n=0" /> anularía el gradiente transversal).
             </div>
           </div>
 
@@ -486,9 +472,7 @@ export const StageTheory: React.FC = () => {
               <div className="text-xs font-semibold text-slate-600 mb-1">
                 Frecuencia de corte del modo dominante:
               </div>
-              <MathView block>
-                {`f_{c,10} = \\frac{c}{2a\\sqrt{\\mu_r \\epsilon_r}} = \\frac{u}{2a}`}
-              </MathView>
+              <MathView block math="f_{c,10} = \frac{c}{2a\sqrt{\mu_r \epsilon_r}} = \frac{u}{2a}" />
               <p className="text-xs text-slate-600 mt-2">
                 Esta expresión revela que <MathView math="f_{c,10}" /> depende <strong>única y exclusivamente del ancho <MathView math="a" /></strong> y de las propiedades del dieléctrico, siendo completamente independiente de la altura <MathView math="b" />.
               </p>
@@ -503,9 +487,7 @@ export const StageTheory: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="p-3.5 bg-blue-50/70 border border-blue-200 rounded-xl space-y-1">
                   <div className="text-xs font-bold text-blue-900">Campo Eléctrico Vertical:</div>
-                  <MathView block>
-                    {`E_y = -j \\frac{\\omega\\mu a}{\\pi} H_0 \\sin\\left(\\frac{\\pi x}{a}\\right) e^{-j\\beta z}`}
-                  </MathView>
+                  <MathView block math="E_y = -j \frac{\omega\mu a}{\pi} H_0 \sin\left(\frac{\pi x}{a}\right) e^{-j\beta z}" />
                   <p className="text-[11px] text-blue-800">
                     Máximo en el centro (<MathView math="x = a/2" />) y cero en las paredes laterales (<MathView math="x = 0, a" />).
                   </p>
@@ -513,9 +495,7 @@ export const StageTheory: React.FC = () => {
 
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
                   <div className="text-xs font-bold text-slate-900">Campo Magnético Transversal:</div>
-                  <MathView block>
-                    {`H_x = j \\frac{\\beta a}{\\pi} H_0 \\sin\\left(\\frac{\\pi x}{a}\\right) e^{-j\\beta z}`}
-                  </MathView>
+                  <MathView block math="H_x = j \frac{\beta a}{\pi} H_0 \sin\left(\frac{\pi x}{a}\right) e^{-j\beta z}" />
                   <p className="text-[11px] text-slate-600">
                     Proporcional a <MathView math="E_y" /> mediante la relación <MathView math="H_x = -E_y / Z_{TE}" />.
                   </p>
@@ -523,27 +503,29 @@ export const StageTheory: React.FC = () => {
 
                 <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
                   <div className="text-xs font-bold text-slate-900">Campo Magnético Longitudinal:</div>
-                  <MathView block>
-                    {`H_z = H_0 \\cos\\left(\\frac{\\pi x}{a}\\right) e^{-j\\beta z}`}
-                  </MathView>
+                  <MathView block math="H_z = H_0 \cos\left(\frac{\pi x}{a}\right) e^{-j\beta z}" />
                   <p className="text-[11px] text-slate-600">
                     Cero en el centro (<MathView math="x = a/2" />) y máximo en las paredes laterales.
                   </p>
                 </div>
               </div>
 
-              <div className="mt-3 p-3 bg-slate-100 rounded-lg text-xs font-mono text-slate-700 text-center">
-                Componentes Nulas: <MathView math="E_x = 0, \\quad E_z = 0, \\quad H_y = 0" />
+              {/* Clean Componentes Nulas Card */}
+              <div className="mt-4 p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 text-center flex flex-wrap items-center justify-center gap-2">
+                <span className="font-semibold text-slate-600">Componentes Nulas del Modo Dominante TE₁₀:</span>
+                <MathView math="E_x = 0, \quad E_z = 0, \quad H_y = 0" className="text-sm font-semibold text-slate-900" />
               </div>
             </div>
 
             {/* Surface currents and Slots */}
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
-              <h4 className="font-bold text-slate-900 text-sm">
-                Corrientes Superficiales de Pared (<MathView math="\\vec{J}_s = \\hat{n} \\times \\vec{H}" />) y Ranuras de Radiación
+              <h4 className="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-1.5">
+                <span>Corrientes Superficiales de Pared (</span>
+                <MathView math="\vec{J}_s = \hat{n} \times \vec{H}" />
+                <span>) y Ranuras de Radiación</span>
               </h4>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                Las líneas de campo magnético <MathView math="\\vec{H}" /> cierran en bucles horizontales en el plano <MathView math="xz" />. Esto induce corrientes eléctricas de conducción en las paredes internas metálicas:
+                Las líneas de campo magnético <MathView math="\vec{H}" /> cierran en bucles horizontales en el plano <MathView math="xz" />. Esto induce corrientes eléctricas de conducción en las paredes internas metálicas:
               </p>
               <ul className="text-xs sm:text-sm space-y-1.5 text-slate-700 pl-4 list-disc">
                 <li>

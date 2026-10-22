@@ -411,7 +411,7 @@ export const StageSimulator: React.FC = () => {
             </div>
             <div className="text-[11px] text-slate-500">
               <MathView
-                math={`\\lambda_c = ${(C_LIGHT_MS / (results.fc * 1e7)).toFixed(2)}\\text{ cm}`}
+                math={`\\lambda_c = ${(C_LIGHT_MS / (results.fc * 1e7)).toFixed(2)} \\text{ cm}`}
               />
             </div>
           </div>
@@ -420,7 +420,7 @@ export const StageSimulator: React.FC = () => {
           <div className="bg-white rounded-xl p-4 border border-slate-200/90 shadow-xs space-y-1">
             <div className="text-[11px] font-semibold text-slate-500 flex items-center justify-between">
               <span>Longitud en Guía</span>
-              <MathView math="\\lambda_g" />
+              <MathView math="\lambda_g" />
             </div>
             <div className="text-xl font-bold font-mono text-blue-700">
               {results.lambdaG !== null ? (
@@ -436,7 +436,7 @@ export const StageSimulator: React.FC = () => {
             </div>
             <div className="text-[11px] text-slate-500">
               <MathView
-                math={`\\lambda_0 = ${results.lambda0.toFixed(2)}\\text{ cm}`}
+                math={`\\lambda_0 = ${results.lambda0.toFixed(2)} \\text{ cm}`}
               />
             </div>
           </div>
@@ -465,7 +465,7 @@ export const StageSimulator: React.FC = () => {
             </div>
             <div className="text-[11px] text-slate-500">
               <MathView
-                math={`\\eta = ${results.eta.toFixed(1)}\\ \\Omega`}
+                math={`\\eta = ${results.eta.toFixed(1)} \\ \\Omega`}
               />
             </div>
           </div>
@@ -497,7 +497,7 @@ export const StageSimulator: React.FC = () => {
                 />
               ) : (
                 <MathView
-                  math={`\\alpha = ${results.alpha.toFixed(1)}\\text{ Np/m}`}
+                  math={`\\alpha = ${results.alpha.toFixed(1)} \\text{ Np/m}`}
                 />
               )}
             </div>

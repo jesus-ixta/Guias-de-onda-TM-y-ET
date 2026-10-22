@@ -14,8 +14,26 @@ interface MathViewProps {
 }
 
 /**
- * MathView renders mathematical equations using KaTeX.
- * If text contains mixed content with $ inline $ or $$ display $$, it parses and renders automatically.
+ * Normalizes LaTeX string by replacing accidental double backslashes before LaTeX control words or symbols.
+ * (e.g. \\quad -> \quad, \\sin -> \sin, \\vec -> \vec, \\neq -> \neq, \\hat -> \hat, \\partial -> \partial)
+ */
+export function cleanLatex(input: string): string {
+  if (!input) return '';
+  let str = input.trim();
+  
+  // Replace \\ before command letters or common symbols with single \
+  // e.g. \\quad -> \quad, \\sin -> \sin, \\vec -> \vec, \\neq -> \neq, \\, -> \,
+  str = str.replace(/\\\\([a-zA-Z,;:!])/g, '\\$1');
+  
+  // Replace \\ followed by space with \ followed by space (TeX space)
+  str = str.replace(/\\\\ /g, '\\ ');
+  
+  return str;
+}
+
+/**
+ * MathView renders mathematical equations using KaTeX with textbook typographical fidelity.
+ * Supports inline equations, block equations, and mixed texts containing $ inline $ or $$ display $$.
  */
 export const MathView: React.FC<MathViewProps> = ({
   math,
@@ -23,26 +41,28 @@ export const MathView: React.FC<MathViewProps> = ({
   block = false,
   className = '',
 }) => {
-  const content = (math ?? (typeof children === 'string' ? children : '')).trim();
+  const rawContent = (math ?? (typeof children === 'string' ? children : '')).trim();
 
   const renderedHtml = useMemo(() => {
-    if (!content) return '';
+    if (!rawContent) return '';
 
-    // If whole string is wrapped in $$ or block is true, render in display mode
+    const content = cleanLatex(rawContent);
+
+    // If block is true or whole string is enclosed in $$, render in display mode
     if (block) {
-      const clean = content.replace(/^\$\$|\$\$$/g, '').trim();
+      const clean = cleanLatex(content.replace(/^\$\$|\$\$$/g, '').trim());
       try {
         return katex.renderToString(clean, {
           displayMode: true,
           throwOnError: false,
           output: 'htmlAndMathml',
         });
-      } catch (e) {
-        return `<span class="text-red-500 font-mono text-xs">${clean}</span>`;
+      } catch {
+        return `<span class="font-serif italic">${clean}</span>`;
       }
     }
 
-    // Check if it's a simple raw equation without $ delimiters
+    // If it's a direct formula without any $ delimiters
     if (!content.includes('$')) {
       try {
         return katex.renderToString(content, {
@@ -50,8 +70,8 @@ export const MathView: React.FC<MathViewProps> = ({
           throwOnError: false,
           output: 'htmlAndMathml',
         });
-      } catch (e) {
-        return `<span class="text-red-500 font-mono text-xs">${content}</span>`;
+      } catch {
+        return `<span class="font-serif italic">${content}</span>`;
       }
     }
 
@@ -59,17 +79,21 @@ export const MathView: React.FC<MathViewProps> = ({
     try {
       // Replace $$ ... $$ first
       let html = content.replace(/\$\$([\s\S]*?)\$\$/g, (_, eq) => {
-        return katex.renderToString(eq.trim(), {
+        const cleanEq = cleanLatex(eq.trim());
+        return katex.renderToString(cleanEq, {
           displayMode: true,
           throwOnError: false,
+          output: 'htmlAndMathml',
         });
       });
 
       // Replace $ ... $
       html = html.replace(/\$([^\$]+?)\$/g, (_, eq) => {
-        return katex.renderToString(eq.trim(), {
+        const cleanEq = cleanLatex(eq.trim());
+        return katex.renderToString(cleanEq, {
           displayMode: false,
           throwOnError: false,
+          output: 'htmlAndMathml',
         });
       });
 
@@ -77,12 +101,12 @@ export const MathView: React.FC<MathViewProps> = ({
     } catch {
       return content;
     }
-  }, [content, block]);
+  }, [rawContent, block]);
 
   if (block) {
     return (
       <div
-        className={`my-3 overflow-x-auto text-center py-2 px-3 rounded-lg bg-slate-50 border border-slate-200/80 shadow-xs ${className}`}
+        className={`my-3 overflow-x-auto text-center py-2.5 px-4 rounded-xl bg-slate-50/80 border border-slate-200/90 shadow-2xs ${className}`}
         dangerouslySetInnerHTML={{ __html: renderedHtml }}
       />
     );
@@ -90,7 +114,7 @@ export const MathView: React.FC<MathViewProps> = ({
 
   return (
     <span
-      className={`inline-math font-serif ${className}`}
+      className={`inline-math font-serif inline-block align-baseline ${className}`}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
   );
